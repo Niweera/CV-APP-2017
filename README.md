@@ -43,5 +43,5 @@ gulp server:start
 ```
 Site will be served at `http://localhost:3000/`. check the app using a browser of your choice.
 
-## Users Manual
-- [Users Manual [Draft]](https://docs.google.com/document/d/10dQ9MYcb_vasZhgwbW_00qagwAVry0pioGxKDAn_vA8/edit?usp=sharing)
+## User Manual
+- [User Manual [Draft]](https://docs.google.com/document/d/10dQ9MYcb_vasZhgwbW_00qagwAVry0pioGxKDAn_vA8/edit?usp=sharing)
