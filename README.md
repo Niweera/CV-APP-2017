@@ -18,7 +18,7 @@ npm install
 bower install
 ```
 
-- Installing dependacies in client.
+- Installing dependacies in server.
 ```
 cd ../server
 npm install
