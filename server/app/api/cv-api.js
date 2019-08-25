@@ -47,6 +47,10 @@ router.post('/upload', auth,function (req, res, next) {
         var data = {
             userID: req.body.userID,
             studentName: req.body.studentName,
+            studentStream: req.body.studentStream,
+            studentYear: req.body.studentYear,
+            
+            studentEmail: req.body.studentEmail,
             filename: req.files[0].filename,
             type: req.files[0].mimetype,
             path: req.files[0].path

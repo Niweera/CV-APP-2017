@@ -83,8 +83,13 @@
                         showErrorMessage('We accept only PDF formatted file!', 'Error');
                     } else {
                         var formData = new FormData(this);
+                        
                         formData.append('userID', userID);
                         formData.append('studentName', studentObject.name);
+                        formData.append('studentStream', studentObject.stream);
+                        formData.append('studentYear', studentObject.year);
+                        formData.append('studentEmail', studentObject.email);
+                        // console.log(formData);
                         swal({
                             title: "Please confirm your upload.",
                             text: "Submit to upload your CV",

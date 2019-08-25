@@ -12,7 +12,9 @@ module.exports.saveCv = function (data, next, callback) {
     Cv.findOne({userID: cv.userID}, function (err, result) {
       if (err) return next(err);
         // set new file name using student name
-        var newFileName = data.studentName.split(" ").join("-") + ".pdf";
+        var newFileName = data.studentName.split(" ").join("-")
+        newFileName = newFileName + "_" + data.studentStream.split(" ").join("-")
+        newFileName = newFileName + "_" + data.studentYear.split(" ").join("-")+ ".pdf";
         data.filename = newFileName;
 
         if (result) {
@@ -51,7 +53,6 @@ module.exports.saveCv = function (data, next, callback) {
         } else {
             // rename new file to student name
             var curPath = path.join(__dirname, '..', '..', 'assets', 'uploads', cv.filename);
-            var newFileName = data.studentName.split(" ").join("-") + ".pdf";
             var newPath = path.join(__dirname, '..', '..', 'assets', 'uploads', newFileName);
             console.log("Renaming new file to " + newFileName);
             fs.rename(curPath, newPath, function (err) {
