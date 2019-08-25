@@ -26,3 +26,7 @@ server/assets/uploads/*
 
 # ignore conf file
 server/app/config/conf.js
+.vscode/settings.json
+.vscode/launch.json
+client/package-lock.json
+server/package-lock.json
