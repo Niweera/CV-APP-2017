@@ -55,7 +55,7 @@ module.exports.getCompaniesBySelectedStudent = function (req, res, next) {
                         }
                     });
                 });
-                final.sort({timeStamp: -1});
+                // final.sort({timeStamp: -1});
                 res.json({"result": final});
             });
         });
