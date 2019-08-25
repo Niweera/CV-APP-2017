@@ -1,7 +1,8 @@
 # CV-Application-2107
 
 ## Requirements
- * Node v8.16.1(lts/carbon) - *will not work for later versions*. 
+ * Node v8.16.1(lts/carbon) - *will not work for later versions*.
+ * MongoDB (3.6.3+ Community Edition)
 
 ## Getting Started
 - Install gulp and bower globaly.
