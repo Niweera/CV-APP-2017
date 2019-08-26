@@ -30,7 +30,7 @@ bower install
   - add parameters to `conf.js` file.
     ```
     module.exports = {
-        secret:"your-secret",
+        secret:"your--secret",
         database:"mongodb://username:password@URL:PORT/database"
     };
     ```
