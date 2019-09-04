@@ -22,7 +22,7 @@ var fs = require('fs');
 var https = require('https');
 const Sentry = require('@sentry/node');
 
-//Sentry Error Tracking
+//Sentry Remote Error Tracking
 Sentry.init({ dsn: 'https://43a064cb4bf14203a58728c616f327c4@sentry.io/1551311' });
 
 mongoose.connect(
