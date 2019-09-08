@@ -51,14 +51,33 @@
         window.location.replace('./');
     } else {
         $(document).ready(function () {
-            if(!companyObject){
-                companyObject = localStorage.getItem('companyObject')
-                companyObject = JSON.parse(companyObject)
-            }
 
             var viewButton = '<a class="btn btn-info btn-sm  waves-effect ajaxView" style = "margin-right:10px;" title="View CV"> <i class="material-icons">description</i> </a>';
             var ajaxView = "ajaxView";
 
+            if(typeof companyObject == 'undefined'){
+                $.ajax({
+                    type: "POST",
+                    url: domain + "logout",
+                    data: '',
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success == true) {
+                            localStorage.removeItem("jwt_token");
+                            localStorage.removeItem("companyObject");
+                            window.location.replace(response.path);
+                            console.log(response);
+                        } else {
+                            alert("Something went wrong")
+                        }
+                        // console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status, error);
+                    }
+                });
+            }
             // Set position tabs
             companyObject.positions.forEach(function (t) {
                 var navtab = "<li role='presentation'><a class='positionTab' href='#tablediv' data-toggle='tab'>" + t + "</a></li>"

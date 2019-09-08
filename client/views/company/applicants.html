@@ -93,10 +93,7 @@
         window.location.replace('./');
     } else {
         $(document).ready(function () {
-            if(!companyObject){
-                companyObject = localStorage.getItem('companyObject')
-                companyObject = JSON.parse(companyObject)
-            }
+            
             
             var selectButton = '<a class="btn btn-success btn-xs  waves-effect ajaxSelect" style = "margin-right:10px;" title="Shortlist"> <i class="material-icons">done_all</i> </a>';
             var viewButton = '<a class="btn btn-info btn-xs  waves-effect ajaxView" style = "margin-right:10px;" title="View CV"> <i class="material-icons">description</i> </a>';
@@ -105,6 +102,30 @@
             var ajaxRemove = "ajaxRemove";
             var ajaxSelect = "ajaxSelect";
             var ajaxView = "ajaxView";
+
+            if(typeof companyObject == 'undefined'){
+                $.ajax({
+                    type: "POST",
+                    url: domain + "logout",
+                    data: '',
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success == true) {
+                            localStorage.removeItem("jwt_token");
+                            localStorage.removeItem("companyObject");
+                            window.location.replace(response.path);
+                            console.log(response);
+                        } else {
+                            alert("Something went wrong")
+                        }
+                        // console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status, error);
+                    }
+                });
+            }
 
             // Set position tabs
             companyObject.positions.forEach(function (t) {
