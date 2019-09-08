@@ -81,7 +81,7 @@ module.exports = function (app, passport) {
     });
 
     // OK
-    app.post('/signup', auth ,function (req, res, next) {
+    app.post('/signup', auth, function (req, res, next) {
         if (!req.body.username || !req.body.password || !req.body.usertype) {
             res.json({
                 success: false,
@@ -89,7 +89,9 @@ module.exports = function (app, passport) {
             });
         } else {
             //Check if username exists
-            User.findOne({username: req.body.username}, function (err, user) {
+            User.findOne({
+                username: req.body.username
+            }, function (err, user) {
                 if (err) throw err;
                 if (!user) {
                     var newUser = new User({
@@ -112,22 +114,26 @@ module.exports = function (app, passport) {
                     return res.json({
                         success: false,
                         msg: 'Username already exists.',
-                        data: {username: req.body.username}
+                        data: {
+                            username: req.body.username
+                        }
                     });
                 }
             });
         }
     });
 
-    //ok
-    app.post('/changepass',auth ,function (req, res, next) {
+    //reset the password of a given user [accessible via admin portal]
+    app.post('/changepass', auth, function (req, res, next) {
         if (!req.body.username || !req.body.oldpassword || !req.body.password) {
             res.json({
                 success: false,
                 msg: 'Please provide your username, old password & new password.'
             });
         } else {
-            User.findOne({username: req.body.username}, function (err, user) {
+            User.findOne({
+                username: req.body.username
+            }, function (err, user) {
                 if (err) throw err;
                 if (!user) {
                     res.json({
@@ -159,6 +165,43 @@ module.exports = function (app, passport) {
                                 msg: 'Authentication failed. Wrong password.'
                             });
                         }
+                    });
+                }
+            });
+        }
+    });
+
+    app.post('/resetpass', auth, function (req, res, next) {
+        if (!req.body.username || !req.body.password) {
+            res.json({
+                success: false,
+                msg: 'Please provide your username & new password.'
+            });
+        } else {
+            User.findOne({
+                username: req.body.username
+            }, function (err, user) {
+                if (err) throw err;
+                if (!user) {
+                    res.json({
+                        success: false,
+                        msg: 'Authentication failed. User not found.'
+                    });
+
+                } else {
+                    // then reset the pwd of the user
+                    user.password = req.body.password;
+                    user.save(function (err) {
+                        if (err) {
+                            return res.json({
+                                success: false,
+                                msg: 'Something went wrong. Please try again'
+                            });
+                        }
+                        res.json({
+                            success: true,
+                            msg: 'Password updated successfully'
+                        });
                     });
                 }
             });

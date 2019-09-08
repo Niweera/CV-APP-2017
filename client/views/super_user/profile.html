@@ -4,39 +4,67 @@
         <div class="card">
             <div class="body">
                 <form id="change_password" method="POST">
-                    <div class="msg">Change Password</div>
+                    <div class="msg">Change Admin Password</div>
 
                     <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="material-icons">lock</i>
-                      </span>
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
                         <div class="form-line">
                             <input type="password" class="form-control" name="oldpassword" minlength="6"
-                                   placeholder="Current Password" required>
+                                placeholder="Current Password" required>
                         </div>
                     </div>
 
                     <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="material-icons">lock</i>
-                      </span>
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
                         <div class="form-line">
                             <input type="password" class="form-control" name="password" minlength="6"
-                                   placeholder="New Password" required>
+                                placeholder="New Password" required>
                         </div>
                     </div>
 
                     <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="material-icons">lock</i>
-                      </span>
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
                         <div class="form-line">
                             <input type="password" class="form-control" name="confirm" minlength="6"
-                                   placeholder="Confirm Password" required>
+                                placeholder="Confirm Password" required>
                         </div>
                     </div>
 
                     <button id="changeButton" class="btn btn-block btn-lg bg-blue waves-effect" type="submit">Change
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form id="reset_password" method="POST">
+                    <div class="msg">Password Reset Portal</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="password" minlength="6"
+                                placeholder="New Password" required>
+                        </div>
+                    </div>
+
+                    <button id="resetButton" class="btn btn-block btn-lg bg-blue waves-effect" type="submit">Change
                     </button>
                 </form>
             </div>
@@ -74,12 +102,12 @@
         $.AdminBSB.input.activate();
         $.AdminBSB.select.activate();
     });
-
 </script>
 
 
 <script>
     var change_pass_form = $("#change_password");
+    var reset_data_form = $("#reset_password");
 
     $('#changeButton').click(function (e) {
         if (change_pass_form.valid()) {
@@ -110,6 +138,36 @@
         }
     });
 
+    $('#resetButton').click(function (e) {
+        e.preventDefault();
+        var change_data = reset_data_form.serialize();
+
+        $.ajax({
+            type: "POST",
+            url: domain + "resetpass",
+            // data : change_data+ &username="+ashan3@gmail.com",
+            data: change_data,
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", getToken());
+            },
+            success: function (response) {
+                if (response.success == true) {
+                    document.getElementById("reset_password").reset();
+                    // alert(response.msg);
+                    showSuccessMessage();
+                } else {
+                    // alert(response.msg);
+                    showErrorMessage(response.msg);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status, error);
+            }
+        });
+    });
+
 
     function showSuccessMessage() {
         swal("Successfully password updated!", '', "success");
@@ -118,5 +176,4 @@
     function showErrorMessage(msg) {
         swal(msg + "!", '', "error");
     }
-
 </script>
