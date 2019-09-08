@@ -1,3 +1,8 @@
 .nav-tabs > li > a.positionTab {
     font-size: 30px;
 }
+
+#career_fair_logo {
+    width: auto;
+    max-width: 40%;
+}
