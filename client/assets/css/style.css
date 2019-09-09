@@ -10360,7 +10360,7 @@ fieldset[disabled] .form-control {
 
 /* Login Page ================================== */
 .login-page {
-    background-color: #1e1e1e;
+    /* background-color: #1e1e1e; */
     padding-left: 0;
     max-width: 360px;
     margin: 5% auto;
