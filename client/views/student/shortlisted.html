@@ -14,12 +14,12 @@
             </div>
             <div class="body">
                 <table id="schduleTable" class="table table-bordered table-striped table-hover" cellspacing="0"
-                       width="100%">
+                    width="100%">
                     <thead>
-                    <tr>
-                      <th>Company</th>
-                      <th>Position</th>
-                    </tr>
+                        <tr>
+                            <th>Company</th>
+                            <th>Position</th>
+                        </tr>
                     </thead>
                 </table>
             </div>
@@ -35,14 +35,13 @@
             var schduleTable = $('#schduleTable').DataTable({
                 dom: 'Bfrtip',
                 responsive: true,
-                buttons: [
-                  {
-                  extend: 'pdfHtml5',
-                  message: 'Shortlisted companies',
-                  title: 'UCSC Career Fair 2019',
-                  filename: 'Shortlisted companies'
-                  }
-                ],
+                buttons: [{
+                    extend: 'pdfHtml5',
+                    text: 'Download Table',
+                    message: 'Shortlisted companies',
+                    title: 'UCSC Career Fair 2019',
+                    filename: 'Shortlisted companies'
+                }],
                 ajax: {
                     url: domain + 'selected_student_company/companies/' + userID,
                     dataSrc: 'result',
@@ -50,9 +49,12 @@
                         xhr.setRequestHeader("Authorization", getToken());
                     }
                 },
-                "columns": [
-                  { "data": "companyName" },
-                  { "data": "position" }
+                "columns": [{
+                        "data": "companyName"
+                    },
+                    {
+                        "data": "position"
+                    }
                 ],
                 "language": {
                     "emptyTable": "Sorry! No companies have shortlisted you yet."

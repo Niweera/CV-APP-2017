@@ -37,7 +37,10 @@
                 dom: 'Bfrtip',
                 responsive: true,
                 buttons: [
-                    'pdf'
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'Download Table'
+                    }, 
                 ],
                 "aaSorting": [],
                 ajax: {
