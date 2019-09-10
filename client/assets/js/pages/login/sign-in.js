@@ -60,11 +60,11 @@ function currentUser() {
 
 function homeRedirect() {
     user_info = currentUser();
-
+    
     if (user_info.usertype == 0) {
         window.location.replace('./views/student');
     } else if (user_info.usertype == 1) {
-        window.location.replace('./views/company');
+window.location.replace('./views/company');
     } else if (user_info.usertype == 99) {
         window.location.replace('./views/super_user');
     } else {
