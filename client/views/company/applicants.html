@@ -173,6 +173,30 @@
                                 config.message = config.filename = 'Not shortlisted applicants - ' + $(this).text();
                             });
                         }
+                    },
+                    {
+                        text: 'Download All ' + position + ' CVs',
+                        action: function (e, dt, node, config) {
+                            swal({
+                            title: "Downloading All CVs ?",
+                            text: "This May take some time, are you sure ?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonClass: "btn btn-danger",
+                            confirmButtonText: "Yes, Download",
+                            cancelButtonText: "Cancel",
+                            closeOnConfirm: false,
+                            closeOnCancel: true,
+                            showLoaderOnConfirm: true
+                            },
+                            function(isConfirm) {
+                            if (isConfirm) {
+                                downloadAllCVs();
+                            }
+                            });
+                            
+                        },
+                        className: 'download-all'
                     }
                 ],
                 ajax: {
@@ -493,6 +517,56 @@
                 applicantTable.ajax.reload();
                 shortListedTable.ajax.reload();
             });
+
+            // Download all cvs
+            function downloadAllCVs() {
+                console.log('Downloading')
+                // gathering cv list
+                var cvs = [];
+                applicantTable.rows().every(function () {
+                    var data = this.data();
+                    cvs.push(data.cv);
+                });
+
+                console.log('Sending')
+                $.ajax({
+                    type: "POST",
+                    url: domain + "cv/download",
+                    data: {
+                        cvs: cvs,
+                        position: encodeURIComponent(position),
+                        company: companyObject.userID
+                    },
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", getToken());
+                    },
+                    success: function (response) {
+                        if (response.success === true) {
+                            var element = document.createElement('a');
+                            var nameParts = response.data.split("/");
+                            element.setAttribute('href', domain + nameParts[0] + '/' + nameParts[1] + '/' + encodeURIComponent(nameParts[2]));
+
+                            var filename = nameParts[2].split("-").join(" ");
+                            element.setAttribute('download', filename);
+
+                            element.style.display = 'none';
+                            document.body.appendChild(element);
+
+                            element.click();
+
+                            document.body.removeChild(element);
+                            swal("CVs Downloaded successfully!");
+                        } else {
+                            showErrorMessage(response.msg);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status, error);
+                    }
+                });
+            }
         });
     }
 
