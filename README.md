@@ -16,7 +16,7 @@ npm install -g gulp
 cd client
 npm install
 bower install
-```
+``` 
 
 - Installing dependacies in server.
 ```
