@@ -20,3 +20,5 @@ services:
       - ./:/home/app
     command:
       [ "node", "./server/server.js" ]
+    depends_on:
+      - mongodb
