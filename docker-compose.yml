@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mongodb:
+    container_name: mongodb
+    ports:
+      - "27017-27019:27017-27019"
+    image: mongo:latest
+  cv:
+    build: .
+    container_name: cv
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/home/app
+    command:
+      [ "node", "./server/server.js" ]
