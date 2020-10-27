@@ -12,7 +12,8 @@ var express = require('express'),
     remoteValidation = require('./app/api/validation'),
     app = express(),
     mongoose = require('mongoose'),
-    port = 80,
+    http_port = process.env.HTTP_PORT || 8080,
+    https_port=process.env.HTTPS_PORT || 8081,
     passport = require('passport');
 
 var jwt = require('express-jwt');
@@ -142,15 +143,15 @@ app.use(function (err, req, res, next) {
     }
 });
 
-app.listen(port, function () {
-    console.log('Server started on port : ' + port);
+app.listen(http_port, function () {
+    console.log('HTTP Server started on port: ' + http_port);
 });
 
 const httpsOptions = {
     cert: fs.readFileSync(path.join(__dirname, 'ssl', 'ucsc-career-fair-2019_live.crt')),
     key: fs.readFileSync(path.join(__dirname, 'ssl', 'ucsc-career-fair-2019_live.key')),
-    passphrase: '5ade3c3ead'
+    passphrase: ''
 }
 
 https.createServer(httpsOptions, app)
-    .listen(443, () => console.log("Server is running at port 443"))
+    .listen(https_port, () => console.log("HTTPS Server is running at port: "+ https_port))
