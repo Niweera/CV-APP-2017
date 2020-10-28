@@ -147,11 +147,11 @@ app.listen(http_port, function () {
     console.log('HTTP Server started on port: ' + http_port);
 });
 
-const httpsOptions = {
-    cert: fs.readFileSync(path.join(__dirname, 'ssl', 'ucsc-career-fair-2019_live.crt')),
-    key: fs.readFileSync(path.join(__dirname, 'ssl', 'ucsc-career-fair-2019_live.key')),
-    passphrase: ''
-}
+// const httpsOptions = {
+//     cert: fs.readFileSync(path.join(__dirname, 'ssl', 'ucsc-career-fair-2019_live.crt')),
+//     key: fs.readFileSync(path.join(__dirname, 'ssl', 'ucsc-career-fair-2019_live.key')),
+//     passphrase: ''
+// }
 
-https.createServer(httpsOptions, app)
-    .listen(https_port, () => console.log("HTTPS Server is running at port: "+ https_port))
+// https.createServer(httpsOptions, app)
+//     .listen(https_port, () => console.log("HTTPS Server is running at port: "+ https_port))
