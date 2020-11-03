@@ -7,7 +7,9 @@ services:
       - "27017-27019:27017-27019"
     image: mongo:latest
     volumes:
-      - ~/mongo-volume: /data/db
+      - type: bind
+        source: ~/mongo-volume
+        target: /data/db
   cv:
     build: .
     container_name: cv
