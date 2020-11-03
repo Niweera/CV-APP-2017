@@ -25,7 +25,7 @@ server/assets/uploads/*
 !server/assets/uploads/index.html
 
 # ignore conf file
-server/app/config/conf.js
+#server/app/config/conf.js removed sensitive info
 .vscode/settings.json
 .vscode/launch.json
 client/package-lock.json
