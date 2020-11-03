@@ -5,7 +5,7 @@ module.exports = {
   apps: [
     {
       name: "cv-app",
-      script: "./server/server.js",
+      script: "./server.js",
       watch: false,
       args: ["--color"],
       instances: 1,
