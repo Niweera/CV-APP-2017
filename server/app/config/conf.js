@@ -1,4 +1,4 @@
 module.exports = {
-    secret: process.env.JWT_SECRET,
-    database: process.env.MONGO_URI
+    secret: "your-secret-here",
+    database: "mongodb://localhost:27017/ucsc-cvapp-2017"
 };

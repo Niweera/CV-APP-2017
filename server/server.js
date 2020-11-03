@@ -12,7 +12,7 @@ var express = require('express'),
     remoteValidation = require('./app/api/validation'),
     app = express(),
     mongoose = require('mongoose'),
-    http_port = process.env.HTTP_PORT || 8080,
+    http_port = process.env.HTTP_PORT || 80,
     https_port=process.env.HTTPS_PORT || 8081,
     passport = require('passport');
 
