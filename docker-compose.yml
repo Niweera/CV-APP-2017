@@ -1,16 +1,13 @@
 version: "3.4"
 services:
   mongodb:
-    #network_mode: host
-    #environment:
-      # change the following username and password
-      #- MONGO_INITDB_ROOT_USERNAME=username
-      #- MONGO_INITDB_ROOT_PASSWORD=password
+    network_mode: host
     container_name: mongodb
     ports:
       - "27017-27019:27017-27019"
     image: mongo:latest
-    #command: mongod
+    volumes:
+    - ~/mongo-volume: /data/db
   cv:
     build: .
     container_name: cv
